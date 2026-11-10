@@ -17,41 +17,43 @@ def style(ax):
     ax.tick_params(length=0)
 
 # ---------- Figure 1: nose designs ----------
-designs = [  # name, volume L, Cd diffuse, Cd specular  (fins flat, total)
-    ("SOAR baseline", 3.47, 0.395, 0.439),
-    ("Obtuse wedge", 3.52, 0.395, 0.350),
-    ("Wedge", 3.41, 0.390, 0.261),
-    ("Acute wedge", 2.73, 0.361, 0.114),
-    ("Square blunt bullet", 3.31, 0.379, 0.186),
-    ("Square pointed bullet", 2.77, 0.357, 0.121),
-    ("Round blunt bullet", 2.68, 0.326, 0.185),
-    ("Round pointed bullet", 2.33, 0.310, 0.117),
+designs = [  # name, volume L, total Cd with fins flat: diffuse, CLL (0.5/0.5), specular
+    ("SOAR baseline", 3.47, 0.395, 0.421, 0.439),
+    ("Obtuse wedge", 3.52, 0.395, 0.360, 0.350),
+    ("Wedge", 3.41, 0.390, 0.296, 0.261),
+    ("Acute wedge", 2.73, 0.361, 0.186, 0.114),
+    ("Square blunt bullet", 3.31, 0.379, 0.240, 0.186),
+    ("Square pointed bullet", 2.77, 0.357, 0.189, 0.121),
+    ("Round blunt bullet", 2.68, 0.326, 0.224, 0.185),
+    ("Round pointed bullet", 2.33, 0.310, 0.172, 0.117),
 ]
-n = len(designs); y = np.arange(n)[::-1]; h = 0.36
-fig, ax = plt.subplots(figsize=(9, 6.2), dpi=200)
+walls = [("Diffuse walls (realistic, atomic oxygen)", BLUE),
+         ("CLL walls, accommodation 0.5 (improved material)", AQUA),
+         ("Specular walls (ideal low-drag material)", ORANGE)]
+base = designs[0][2]           # SOAR with diffuse walls = today's reference
+n = len(designs); y = np.arange(n)[::-1] * 1.25; h = 0.32
+fig, ax = plt.subplots(figsize=(9.5, 8.6), dpi=200)
 style(ax)
 ax.xaxis.grid(True, color=GRID, lw=0.8); ax.set_axisbelow(True)
-for i, (name, vol, cdd, cds) in enumerate(designs):
-    for val, off, col in [(cdd, h/2 + 0.02, BLUE), (cds, -h/2 - 0.02, ORANGE)]:
-        ax.barh(y[i] + off, val, height=h, color=col, edgecolor=SURF, linewidth=1)
-        base = designs[0][2] if col == BLUE else designs[0][3]
-        pct = "" if i == 0 else f"  ({100*(val/base-1):+.0f}%)"
-        ax.text(val + 0.006, y[i] + off, f"{val:.3f}{pct}", va="center", fontsize=9, color=INK2)
+for i, d in enumerate(designs):
+    for j, (lab, col) in enumerate(walls):
+        val = d[2 + j]; yy = y[i] + (1 - j) * (h + 0.03)
+        ax.barh(yy, val, height=h, color=col, edgecolor=SURF, linewidth=1)
+        pct = "" if (i == 0 and j == 0) else f"  ({100*(val/base-1):+.0f}%)"
+        ax.text(val + 0.006, yy, f"{val:.3f}{pct}", va="center", fontsize=8.5, color=INK2)
 ax.set_yticks(y)
 ax.set_yticklabels([f"{d[0]}\n{d[1]:.2f} L" for d in designs], fontsize=10)
-for lab in ax.get_yticklabels()[:1]:
-    lab.set_fontweight("bold")
+ax.get_yticklabels()[0].set_fontweight("bold")
 ax.set_xlim(0, 0.56)
 ax.set_xlabel("Total drag coefficient  (A_ref = 0.1125 m², fins flat)")
-fig.text(0.02, 0.965, "Nose shape cuts drag only when the surface reflects molecules",
+fig.text(0.02, 0.972, "A low-drag material only pays off once the nose is shaped",
          fontsize=14, fontweight="bold", ha="left")
-fig.text(0.02, 0.925, "SPARTA DSMC, ~400 km, all designs inside the 3U envelope (100 × 100 × 366 mm); "
-         "% change vs SOAR baseline", fontsize=10, color=INK2, ha="left")
+fig.text(0.02, 0.942, "SPARTA DSMC, ~400 km, all designs inside the 3U envelope (100 × 100 × 366 mm). "
+         "% change vs SOAR with diffuse walls", fontsize=9.5, color=INK2, ha="left")
 from matplotlib.patches import Patch
-ax.legend(handles=[Patch(color=BLUE, label="Diffuse walls (realistic, atomic oxygen)"),
-                   Patch(color=ORANGE, label="Specular walls (ideal low-drag material)")],
-          loc="lower left", bbox_to_anchor=(-0.33, 1.0), ncol=2, frameon=False, fontsize=9.5)
-fig.subplots_adjust(left=0.24, right=0.97, top=0.86, bottom=0.09)
+ax.legend(handles=[Patch(color=c, label=l) for l, c in walls], loc="lower left",
+          bbox_to_anchor=(-0.33, 1.0), ncol=1, frameon=False, fontsize=9.5)
+fig.subplots_adjust(left=0.24, right=0.97, top=0.85, bottom=0.07)
 fig.savefig("drag_comparison.png")
 
 # ---------- Figure 2: validation ----------
