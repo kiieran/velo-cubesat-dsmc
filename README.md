@@ -6,13 +6,12 @@ Rarefied-flow (DSMC) study of how nose geometry and surface materials affect dra
 
 - **Validated workflow:** within 0.3% of analytical free-molecular theory, and within 3% of Manchester's ADBSat panel-method tool on a reconstructed SOAR model.
 - **Shape alone does little:** with realistic (diffuse) surfaces, the best nose shape cuts drag by 22%, and it gives up a third of the internal volume to do it.
-- **A low-drag coating only reduces drag on surfaces angled less than ~46° to the flow:** coating every surface of SOAR raises drag by 7%, while coating only its sides and fins cuts it by 22%.
-- **But drag is not the only job of a coating:** coatings also protect against atomic-oxygen erosion, and the surfaces facing the oncoming atmosphere are the ones most exposed. Leaving them uncoated trades lifetime for drag (see [Drag vs protection](#drag-vs-protection-trade-off)).
-- **Shaping removes the trade-off:** on a well-shaped nose almost nothing is steeper than 46°, so the whole satellite can be coated for protection at little or no drag cost. The square blunt bullet keeps 95% of the internal volume and cuts drag by 39% fully coated with an improved material (CLL, accommodation 0.5), and by 40% with its steep cap left bare.
-- **Upper bounds:** with the improved material, drag falls by up to 56%; an ideal specular material gives up to 71%.
+- **A low-drag coating only pays off once the nose is shaped:** coating the whole of SOAR's flat-fronted shape *raises* drag by 7%. On shaped noses, the same coating cuts drag by up to 56% with an improved material (CLL, accommodation 0.5), and by up to 70% with an ideal specular one.
+- **Why:** a reflective coating reduces drag only on surfaces angled less than ~46° to the flow, and increases it on steeper, forward-facing ones. A shaped nose puts almost all of its surface below that angle.
+- **Best trade-off:** the square blunt bullet keeps 95% of the internal volume and, fully coated with the improved material, cuts drag by 39%.
 - **Effects a panel method misses:** DSMC captures thermal shadowing of the fins by the body, and molecules reflected from the body onto the fins.
 
-![Drag comparison](figures/drag_comparison_v3.png)
+![Drag comparison](figures/drag_comparison.png)
 
 ## The designs
 
@@ -20,46 +19,43 @@ Every body fits inside the 3U envelope (100 × 100 × 366 mm), with its rear fac
 
 | | | | |
 |:---:|:---:|:---:|:---:|
-| <img src="figures/designs/SOAR.png" width="190"> | <img src="figures/designs/SOAR (Obtuse Wedge).png" width="190"> | <img src="figures/designs/SOAR (Wedge).png" width="190"> | <img src="figures/designs/SOAR_Acute_Wedge.png" width="190"> |
+| <img src="figures/designs/SOAR.png" width="190"> | <img src="figures/designs/SOAR (Obtuse Wedge).png" width="190"> | <img src="figures/designs/SOAR (Wedge).png" width="190"> | <img src="figures/designs/SOAR (Acute Wedge).png" width="190"> |
 | [**SOAR baseline**](geometry/soar_body.stl)<br>3.47 L · flat front + INMS | [**Obtuse wedge**](geometry/wedge_obtuse.stl)<br>3.52 L · ~120° apex | [**Wedge**](geometry/wedge.stl)<br>3.41 L · ~90° apex | [**Acute wedge**](geometry/wedge_acute.stl)<br>2.73 L · ~30° apex |
 | <img src="figures/designs/SOAR (Square Blunt Bullet).png" width="190"> | <img src="figures/designs/SOAR (Square Pointed Bullet).png" width="190"> | <img src="figures/designs/SOAR (Round Blunt Bullet).png" width="190"> | <img src="figures/designs/SOAR (Round Pointed Bullet).png" width="190"> |
 | [**Square blunt bullet**](geometry/square_blunt_bullet.stl)<br>3.31 L | [**Square pointed bullet**](geometry/square_pointed_bullet.stl)<br>2.77 L | [**Round blunt bullet**](geometry/round_blunt_bullet.stl)<br>2.68 L | [**Round pointed bullet**](geometry/round_pointed_bullet.stl)<br>2.33 L |
 
 ## Results
 
-Total drag coefficient with the fins flat (A_ref = 0.1125 m²). The CLL and specular columns apply the material only to surfaces shallower than 46° to the flow; steeper surfaces stay diffuse. Percentages are against SOAR with diffuse walls.
+Total drag coefficient with the fins flat (A_ref = 0.1125 m²). Each wall model is applied to every surface of the satellite, fins included. Percentages are against SOAR with diffuse walls.
 
 | Design | Volume | Diffuse | CLL 0.5 | Specular |
 |---|---|---|---|---|
-| SOAR, coated everywhere (rule not applied) | 3.47 L | 0.395 | 0.421 (+7%) | 0.439 (+11%) |
-| SOAR, sides + fins coated | 3.47 L | 0.395 | 0.307 (−22%) | 0.272 (−31%) |
-| Obtuse wedge | 3.52 L | 0.395 (0%) | 0.306 (−23%) | 0.270 (−32%) |
+| SOAR baseline | 3.47 L | 0.395 | 0.421 (+7%) | 0.439 (+11%) |
+| Obtuse wedge | 3.52 L | 0.395 (0%) | 0.360 (−9%) | 0.350 (−11%) |
 | Wedge | 3.41 L | 0.390 (−1%) | 0.296 (−25%) | 0.261 (−34%) |
 | Acute wedge | 2.73 L | 0.361 (−9%) | 0.186 (−53%) | 0.114 (−71%) |
-| Square blunt bullet | 3.31 L | 0.379 (−4%) | 0.238 (−40%) | 0.182 (−54%) |
+| Square blunt bullet | 3.31 L | 0.379 (−4%) | 0.240 (−39%) | 0.186 (−53%) |
 | Square pointed bullet | 2.77 L | 0.357 (−10%) | 0.189 (−52%) | 0.121 (−69%) |
-| Round blunt bullet | 2.68 L | 0.326 (−17%) | 0.213 (−46%) | 0.168 (−57%) |
+| Round blunt bullet | 2.68 L | 0.326 (−17%) | 0.224 (−43%) | 0.185 (−53%) |
 | Round pointed bullet | 2.33 L | 0.310 (−22%) | 0.172 (−56%) | 0.117 (−70%) |
 
 Statistical noise is about ±0.002 in C_D.
 
-## Drag vs protection trade-off
+## Supplementary: partial coating
 
-The 46° rule gives the lowest drag, but it leaves the steepest surfaces uncoated. Those ram-facing surfaces receive the highest atomic-oxygen flux, so a coating that also protects against erosion and oxidation is most valuable exactly where the rule says to leave it off. Leaving them bare saves drag but shortens surface life. Satellite lifetime and erosion are not modelled here, so the table below gives the drag side of the trade only.
+Because a reflective coating only helps below ~46°, drag could be reduced further by leaving the steepest surfaces uncoated. This was simulated (`scripts/tag_by_angle.py` splits each body by surface angle), but it is **not recommended**. Those steep, ram-facing surfaces (facing the direction of travel, into the oncoming atmosphere) receive the most atomic oxygen, so they are where a protective coating matters most. Leaving them bare would expose them to erosion and oxidation, and the loss of lifetime is likely to outweigh the drag saving.
 
-Drag cost of coating every surface (fins flat), compared with leaving the steep surfaces bare and coating the rest:
+Drag with the steep surfaces left bare and the rest coated (fins flat, CLL / specular), for comparison with full coating:
 
-| Design | Fully coated, CLL 0.5 | Steep surfaces bare, CLL 0.5 | Drag cost of full coating, CLL / specular |
+| Design | Fully coated | Steep surfaces bare | Drag saved by leaving them bare |
 |---|---|---|---|
-| SOAR | 0.421 | 0.307 | +37% / +61% |
-| Obtuse wedge | 0.360 | 0.306 | +18% / +30% |
-| Round blunt bullet | 0.224 | 0.213 | +5% / +10% |
-| Square blunt bullet | 0.240 | 0.238 | +1% / +2% |
-| Wedge, acute wedge, pointed bullets | same | same | 0% (no surface steeper than 46°) |
+| SOAR | 0.421 / 0.439 | 0.307 / 0.272 | 27% / 38% |
+| Obtuse wedge | 0.360 / 0.350 | 0.306 / 0.270 | 15% / 23% |
+| Round blunt bullet | 0.224 / 0.185 | 0.213 / 0.168 | 5% / 9% |
+| Square blunt bullet | 0.240 / 0.186 | 0.238 / 0.182 | 1% / 2% |
+| Wedge, acute wedge, pointed bullets | – | – | 0% (no surface steeper than 46°) |
 
-On a flat-fronted satellite the trade-off is severe: full protection costs over a third more drag. On a shaped nose it largely disappears, because almost every surface already sits below the crossover angle. That makes shaping the nose the way to get both low drag and full coating protection.
-
-A further option, not simulated here, is to use two coatings: a protective coating with diffuse behaviour on the steep surfaces, and a low-accommodation coating everywhere else.
+The saving is large only for flat or blunt fronts. On the shaped noses it is small or zero, which supports the main conclusion: shaping the nose lets the whole satellite be coated for protection while still gaining the full drag benefit.
 
 ## Method
 
@@ -80,7 +76,7 @@ In free molecular flow, drag is set by what happens when a molecule hits the sur
 - **CLL, accommodation 0.5** (improved material): the Cercignani–Lampis–Lord model, partway between diffuse and specular. In SPARTA it is `cll 300.0 0.5 0.5 1.0 1.0` (normal and tangential *energy* accommodation 0.5), which is σ_T = 0.293 in ADBSat's momentum convention. The value is illustrative, not measured.
 - **Specular** (ideal): mirror reflection, a theoretical limit.
 
-A reflective surface roughly doubles the drag on a face-on surface, but greatly reduces it at grazing angles. A Monte Carlo calculation of each wall model puts the crossover at about **46°** for these conditions. `scripts/tag_by_angle.py` uses this to keep each body triangle diffuse or coat it.
+A reflective surface roughly doubles the drag on a face-on surface, but greatly reduces it at grazing angles. A Monte Carlo calculation of each wall model puts the crossover at about **46°** for these conditions. This is why coating helps shaped noses but not SOAR's flat front.
 
 ### SOAR reconstruction
 
@@ -105,7 +101,7 @@ Both DSMC and ADBSat sit a near-constant 0.17–0.20 above the reference curves 
 - CLL 0.5 is an illustrative "improved material". Real surfaces under atomic oxygen are typically closer to diffuse.
 - The SOAR fin and INMS dimensions are estimates.
 - The design comparison uses two fin angles (0° and 90°), not a full sweep.
-- Coatings are modelled only through their gas–surface interaction. Erosion, oxidation, and any change in accommodation as a coating ages are not modelled, so the drag vs protection trade-off is described qualitatively.
+- Coatings are modelled only through their gas–surface interaction. Erosion, oxidation, and any change in accommodation as a coating ages are not modelled.
 - No flight data has been compared, because SOAR's flight drag results are not yet public.
 
 ## Repository structure
