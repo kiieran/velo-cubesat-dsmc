@@ -28,22 +28,22 @@ Every body fits inside the 3U envelope (100 × 100 × 366 mm), with its rear fac
 
 Total drag coefficient with the fins flat (A_ref = 0.1125 m²). Each wall model is applied to every surface of the satellite, fins included. Percentages are against SOAR with diffuse walls.
 
-| Design | Volume | Diffuse | CLL 0.5 | Specular |
-|---|---|---|---|---|
-| SOAR baseline | 3.47 L | 0.395 | 0.421 (+7%) | 0.439 (+11%) |
-| Obtuse wedge | 3.52 L | 0.395 (0%) | 0.360 (−9%) | 0.350 (−11%) |
-| Wedge | 3.41 L | 0.390 (−1%) | 0.296 (−25%) | 0.261 (−34%) |
-| Acute wedge | 2.73 L | 0.361 (−9%) | 0.186 (−53%) | 0.114 (−71%) |
-| Square blunt bullet | 3.31 L | 0.379 (−4%) | 0.240 (−39%) | 0.186 (−53%) |
-| Square pointed bullet | 2.77 L | 0.357 (−10%) | 0.189 (−52%) | 0.121 (−69%) |
-| Round blunt bullet | 2.68 L | 0.326 (−17%) | 0.224 (−43%) | 0.185 (−53%) |
-| Round pointed bullet | 2.33 L | 0.310 (−22%) | 0.172 (−56%) | 0.117 (−70%) |
+| Design | Volume | Volume (% of SOAR) | Diffuse | CLL 0.5 | Specular |
+|---|---|---|---|---|---|
+| SOAR baseline | 3.47 L | 100% | 0.395 | 0.421 (+7%) | 0.439 (+11%) |
+| Obtuse wedge | 3.52 L | 101% | 0.395 (0%) | 0.360 (−9%) | 0.350 (−11%) |
+| Wedge | 3.41 L | 98% | 0.390 (−1%) | 0.296 (−25%) | 0.261 (−34%) |
+| Acute wedge | 2.73 L | 78% | 0.361 (−9%) | 0.186 (−53%) | 0.114 (−71%) |
+| Square blunt bullet | 3.31 L | 95% | 0.379 (−4%) | 0.240 (−39%) | 0.186 (−53%) |
+| Square pointed bullet | 2.77 L | 80% | 0.357 (−10%) | 0.189 (−52%) | 0.121 (−69%) |
+| Round blunt bullet | 2.68 L | 77% | 0.326 (−17%) | 0.224 (−43%) | 0.185 (−53%) |
+| Round pointed bullet | 2.33 L | 67% | 0.310 (−22%) | 0.172 (−56%) | 0.117 (−70%) |
 
 Statistical noise is about ±0.002 in C_D.
 
 ## Supplementary: partial coating
 
-Because a reflective coating only helps below ~46°, drag could be reduced further by leaving the steepest surfaces uncoated. This was simulated (`scripts/tag_by_angle.py` splits each body by surface angle), but it is **not recommended**. Those steep, ram-facing surfaces (facing the direction of travel, into the oncoming atmosphere) receive the most atomic oxygen, so they are where a protective coating matters most. Leaving them bare would expose them to erosion and oxidation, and the loss of lifetime is likely to outweigh the drag saving.
+Because a reflective coating only helps below ~46°, drag could be reduced further by leaving the steepest surfaces uncoated. This was simulated (`scripts/tag_by_angle.py` splits each body by surface angle), but it is not recommended. Those surfaces facing the oncoming atmosphere receive the most atomic oxygen, so they are where a protective coating matters most. Leaving them bare would expose them to erosion and oxidation, and the loss of lifetime is likely to outweigh the drag saving.
 
 Drag with the steep surfaces left bare and the rest coated (fins flat, CLL / specular), for comparison with full coating:
 
