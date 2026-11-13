@@ -20,9 +20,9 @@ Every body fits inside the 3U envelope (100 × 100 × 366 mm), with its rear fac
 
 | | | | |
 |:---:|:---:|:---:|:---:|
-| <img src="figures/designs/SOAR.png" width="190"> | <img src="figures/designs/SOAR (Obtuse Wedge).png" width="190"> | <img src="figures/designs/SOAR (Wedge).png" width="190"> | <img src="figures/designs/SOAR (Acute Wedge).png" width="190"> |
-| [**SOAR baseline**](geometry/SOAR.stl)<br>3.47 L · flat front + INMS | [**Obtuse wedge**](geometry/SOAR (Obtuse Wedge).stl)<br>3.52 L · ~120° apex | [**Wedge**](geometry/SOAR (Wedge).stl)<br>3.41 L · ~90° apex | [**Acute wedge**](geometry/wedge_acute.stl)<br>2.73 L · ~30° apex |
-| <img src="figures/designs/SOAR_Square_Blunt_Bullet.png" width="190"> | <img src="figures/designs/SOAR_Square_Pointed_Bullet.png" width="190"> | <img src="figures/designs/SOAR_Round_Blunt_Bullet.png" width="190"> | <img src="figures/designs/SOAR_Round_Pointed_Bullet.png" width="190"> |
+| <img src="figures/designs/SOAR.png" width="190"> | <img src="figures/designs/SOAR (Obtuse Wedge).png" width="190"> | <img src="figures/designs/SOAR (Wedge).png" width="190"> | <img src="figures/designs/SOAR_Acute_Wedge.png" width="190"> |
+| [**SOAR baseline**](geometry/soar_body.stl)<br>3.47 L · flat front + INMS | [**Obtuse wedge**](geometry/wedge_obtuse.stl)<br>3.52 L · ~120° apex | [**Wedge**](geometry/wedge.stl)<br>3.41 L · ~90° apex | [**Acute wedge**](geometry/wedge_acute.stl)<br>2.73 L · ~30° apex |
+| <img src="figures/designs/SOAR (Square Blunt Bullet).png" width="190"> | <img src="figures/designs/SOAR (Square Pointed Bullet).png" width="190"> | <img src="figures/designs/SOAR (Round Blunt Bullet).png" width="190"> | <img src="figures/designs/SOAR (Round Pointed Bullet).png" width="190"> |
 | [**Square blunt bullet**](geometry/square_blunt_bullet.stl)<br>3.31 L | [**Square pointed bullet**](geometry/square_pointed_bullet.stl)<br>2.77 L | [**Round blunt bullet**](geometry/round_blunt_bullet.stl)<br>2.68 L | [**Round pointed bullet**](geometry/round_pointed_bullet.stl)<br>2.33 L |
 
 ## Results
